@@ -1,22 +1,119 @@
 import 'package:flutter/material.dart';
 
-// main method is the starting point of flutter app
+//* main Method is the starting point of flutter app
 void main() {
   // runApp(const MyApp());
-  // my test app
-  runApp(BasicApp());
+  runApp(const BasicApp());
 }
 
 class BasicApp extends StatelessWidget {
+  static const String _title = "basics follow along";
+
+  const BasicApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(
-      appBar: AppBar(title: const Text("Yo")),
-      body: const Text("page body"),
-    ));
+      title: _title,
+      home: Counter(),
+    );
   }
 }
+
+class Counter extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _CounterState();
+}
+
+//* Counter App
+class _CounterState extends State<Counter> {
+  int _count = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      _count += 1;
+    });
+  }
+
+  void _decrementCounter() {
+    setState(() {
+      _count -= 1;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Counter App"),
+      ),
+      body: Center(
+          child: Column(
+        children: <Widget>[
+          const Text("Count is = "),
+          Text("$_count"),
+          ElevatedButton(
+              onPressed: _incrementCounter, child: const Text("PLUS")),
+          ElevatedButton(
+            onPressed: _decrementCounter,
+            child: const Text("Minus"),
+          )
+        ],
+      )),
+      floatingActionButton: FloatingActionButton(
+          onPressed: _incrementCounter, child: const Icon(Icons.add)),
+    );
+  }
+}
+
+class PositionedTiles extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => PositionedTilesState();
+}
+
+class PositionedTilesState extends State<PositionedTiles> {
+  late List<Widget> tiles;
+
+  @override
+  void initState() {
+    super.initState();
+    tiles = [
+      StatelessColorfulTile(),
+      StatelessColorfulTile(),
+    ];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+          child: Row(
+        children: tiles,
+      )),
+      floatingActionButton: FloatingActionButton(
+        onPressed: swapTiles(),
+        child: const Icon(Icons.sentiment_very_satisfied),
+      ),
+    );
+  }
+
+  swapTiles() {
+    setState(() {
+      tiles.insert(1, tiles.removeAt(0));
+    });
+  }
+}
+
+class StatelessColorfulTile extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      title: "title here....",
+    );
+  }
+}
+
+const testButton = ElevatedButton(onPressed: null, child: null);
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
