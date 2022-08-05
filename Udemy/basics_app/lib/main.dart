@@ -12,20 +12,11 @@ class MyApp extends StatelessWidget{
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text("RichApp"),
-          backgroundColor: Colors.deepPurpleAccent,),
-        body: Column(
-          children: const [
-            Text("Data1", style: TextStyle(color: Colors.white),),
-            Text("Data2", style: TextStyle(color: Colors.white),),
-            Text("Data3", style: TextStyle(color: Colors.white),),
-          ],
+        appBar: AppBar(title: const Text("Poor App"), backgroundColor: Colors.purple),
+        body: const Center(
+            child: Image(image: AssetImage('images/diamond.png'))),
         ),
-        backgroundColor: Colors.black26,
-
-      )
-    );
+      );
   }
 
 }
